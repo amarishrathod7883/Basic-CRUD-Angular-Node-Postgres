@@ -1,0 +1,38 @@
+<div>
+  <div class="submit-form">
+    <!-- <div *ngIf="!submitted"> -->
+      <form [formGroup]="rForm" (ngSubmit)="saveTutorial(rForm.value)" class="form-horizontal">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            class="form-control"
+            id="title"
+            formControlName="title"
+            name="title"
+          />
+          <small *ngIf="rForm.get('title').touched && rForm.get('title')?.errors?.required" class="text-danger">
+            * Title is required.
+          </small>
+          <small *ngIf="rForm.get('title')?.errors?.titleTaken" class="text-danger">
+            {{ humanError }}
+          </small>
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input
+            class="form-control"
+            id="description"
+            formControlName="description"
+            name="description"
+          />
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+    <!-- </div> -->
+    <!-- <div *ngIf="submitted">
+      <h4>Tutorial was submitted successfully!</h4>
+      <button class="btn btn-success" (click)="newTutorial()">Add</button>
+    </div> -->
+  </div>
+</div>

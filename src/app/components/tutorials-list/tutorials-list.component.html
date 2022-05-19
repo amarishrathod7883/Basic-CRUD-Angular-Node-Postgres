@@ -1,0 +1,62 @@
+<div class="list row">
+  <div class="col-md-8">
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search by title"
+        [(ngModel)]="title"
+        (keyup)="searchTitle()"
+      />
+    </div>
+  </div>
+  <div class="col-md-8">
+    <h4>
+      Tutorials List
+      <button class="float-right btn btn-sm btn-danger" (click)="deleteAllTutorials()">
+        Delete All
+      </button>
+    </h4>
+    
+    <table class="table table-bordered">
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+      <tr *ngIf="tutorials?.length == 0" colspan="3">Record Not Found.</tr>
+      <tr *ngFor="let tutorial of tutorials; let i = index" [class.active]="i == currentIndex">
+        <td>{{ tutorial.title }}</td>
+        <td>{{ tutorial.description }}</td>
+        <td>{{ tutorial.published ? "Published" : "Pending" }}</td>
+        <td>
+          <button (click)="setActiveTutorial(tutorial, i)" class="btn btn-sm btn-info">View</button>
+          <button routerLink="/tutorials/add/{{ tutorial.id }}" class="ml-2 btn btn-sm btn-warning">Edit</button>
+          <button (click)="deleteTutorial(tutorial)" class="ml-2 btn btn-sm btn-success">Delete</button>
+        </td>
+      </tr>
+    </table>
+    
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="currentTutorial.id" class="float-right">
+      <h4>Tutorial</h4>
+      <div>
+        <label><strong>Title:</strong></label> {{ currentTutorial.title }}
+      </div>
+      <div>
+        <label><strong>Description:</strong></label>
+        {{ currentTutorial.description }}
+      </div>
+      <div>
+        <label><strong>Status:</strong></label>
+        {{ currentTutorial.published ? "Published" : "Pending" }}
+      </div>
+    </div>
+    <div *ngIf="!currentTutorial">
+      <br />
+      <p>Please click on a Tutorial...</p>
+    </div>
+  </div>
+</div>
