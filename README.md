@@ -1,4 +1,4 @@
-# User-Auth-JWT-CRUD-MEAN
+# Basic-CRUD-Angular-Node-Postgres
 
 This project was generated with
 
